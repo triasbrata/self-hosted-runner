@@ -1,20 +1,28 @@
-version: '3.8'
+version: "3.8"
 
+x-app: &base
+  build:
+    context: Docker Image
+    dockerfile: Dockerfile
+  restart: always
 services:
-  runner:
-    image: youssefbrr/github-actions:latest # You can use this image or build your own
-    restart: always
+  runnerone:
+    <<: *base
+    volumes:
+      - ./data/runnerone/_work:/home/docker/actions-runner/_work:rw
     environment:
-      - REPO=<owner>/<repo>
-      - REG_TOKEN=<reg-token-for-self-hosted-runner>
-      - NAME=<runner-name>
-    deploy:
-      mode: replicated
-      replicas: 2
-      resources:
-        limits:
-          cpus: '0.5'
-          memory: 512M
-        reservations:
-          cpus: '0.4'
-          memory: 256M
+      - REPO=3A-s-Studio
+      - REG_TOKEN=ABEEE3MIZMOU2AM6I4ISCMDJDREPM
+      - NAME=RunnerOne
+  # runnertwo:
+  #   <<: *base
+  #   environment:
+  #     - REPO=3A-s-Studio
+  #     - REG_TOKEN=ABEEE3O4KOPBUDJU24B4H5TJCOTVG
+  #     - NAME=OrgRunnerTwo
+  rpersonal:
+    <<: *base
+    environment:
+      - REPO=triasbrata/WallpaperApp
+      - REG_TOKEN=ABEEE3OCRCH322AMTLOGS6TJDREFO
+      - NAME=RunnerTwo

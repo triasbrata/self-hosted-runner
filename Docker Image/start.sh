@@ -3,7 +3,9 @@
 REPO=$REPO
 REG_TOKEN=$REG_TOKEN
 NAME=$NAME
-
+echo $REPO
+echo $NAME
+echo $REG_TOKEN
 cd /home/docker/actions-runner || exit
 ./config.sh --url https://github.com/${REPO} --token ${REG_TOKEN} --name ${NAME}
 
